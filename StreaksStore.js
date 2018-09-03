@@ -1,3 +1,5 @@
+
+
 class StreakStore {
 	static testStreaks = [
 		{
@@ -15,6 +17,7 @@ class StreakStore {
 	]
 
 	state = {
+		isAdding: false,
 		streaks: this.constructor.testStreaks,
 	};
 

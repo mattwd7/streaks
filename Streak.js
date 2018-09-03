@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
+export class Streak extends React.Component {
 	render() {
 		return (
-			<View style={styles.streak}>
-				<Text>
+			<View style={styles.wrapper}>
+				<Text style={styles.text}>
 					{this.props.name}
 				</Text>
 			</View>
@@ -14,11 +14,14 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  streak: {
+  wrapper: {
     paddingTop: 30,
     paddingBottom: 30,
     paddingLeft: 15,
     borderBottomWidth: 1, //StyleSheet.hairlineWidth,
     borderBottomColor: '#ccc',
+  },
+  text: {
+  	fontSize: 18,
   }
 })

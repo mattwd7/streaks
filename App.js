@@ -1,27 +1,41 @@
 import React from 'react';
 import { Platform, StyleSheet, Text, View, FlatList } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import StreaksStore from './StreaksStore';
-import Streak from './Streak';
+import { Streak } from './Streak';
+import { TitleBar } from './TitleBar';
+import { NewStreakModal } from './NewStreakModal';
 
 export default class App extends React.Component {
+  state = {
+    isAdding: false,
+  };
+
   render() {
     return (
-      <View style={styles.appWrapper}>
-        {this._renderTitle()}
+      <View style={styles.wrapper}>
+        {this._renderTitleBar()}
         {this._renderStreaks()}
       </View>
     );
   }
 
-  _renderTitle() {
+  _renderTitleBar() {
     return (
-      <View style={styles.title}>
-        <Text style={styles.titleText}>
-          My Streaks
-        </Text>
-      </View>
+      <TitleBar
+        title='My Streaks'
+        rightOption={<Icon style={styles.titleAdd} name="add" size={26} color="#3CABDA" onPress={this._onAddStreak.bind(this)} />}
+      >
+        <NewStreakModal visible={this.state.isAdding} />
+      </TitleBar>
     );
+  }
+
+  _onAddStreak() {
+    this.setState({
+      isAdding: true,
+    });
   }
 
   _renderStreaks() {
@@ -46,24 +60,14 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  appWrapper: {
+  wrapper: {
     flex: 1,
     marginTop: (Platform.OS === 'ios') ? 18 : 0,
   },
-  title: {
-    alignItems: 'center',
-    backgroundColor: '#eee',
-    justifyContent: 'center',
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
-  titleText: {
-    fontSize: 30,
-  },
-  streaks: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    width: '100%',
-  }
+    streaks: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: '#fff',
+      width: '100%',
+    }
 });
